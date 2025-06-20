@@ -1,0 +1,147 @@
+Encryption Routines
+aes_decrypt(a, buff)
+
+Parameters:
+←a: 指向已初始化的AES结构的指针。
+←→buff: 指向要解密的字节缓冲区的指针。
+Returns: 如果使用MR_CFBn和MR_PCFBn模式，则返回从输入寄存器末尾移位的n字节，否则返回0。
+意义: 解密16字节或n字节的输入缓冲区。
+
+aes_encrypt(a, buff)
+
+Parameters: 与aes_decrypt相同。
+Returns: 如果使用MR_CFBn和MR_PCFBn模式，则返回加密n字节输入后从输入寄存器末尾移位的n字节，否则返回0。
+意义: 加密16字节或n字节的输入缓冲区。
+
+aes_end(a)
+
+Parameters:
+←→a: 指向已初始化的AES结构的指针。
+意义: 结束AES加密会话，并释放与之关联的内存。
+
+aes_getreg(a, ir)
+
+Parameters:
+←a: 指向AES结构的指针。
+→ir: 用于存储提取的16字节数据的字符数组。
+意义: 读取与AES实例关联的输入链式寄存器的当前内容。
+
+aes_init(a, mode, nk, key, iv)
+
+Parameters:
+→a: 指向AES结构的指针。
+←mode: 要使用的模式：MR_ECB、MR_CBC、MR_CFBn、MR_PCFBn或MR_OFBn。
+←nk: 密钥大小，可以是16、24或32。
+←key: 指向密钥的指针。
+←iv: 指向初始化向量（IV）的指针。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 使用AES初始化加密/解密会话。
+
+aes_reset(a, mode, iv)
+
+Parameters: 除了没有nk和key参数外，其余与aes_init相同。
+意义: 重置AES结构。
+
+shs256_hash(sh, hash)
+
+Parameters:
+←sh: 指向当前实例的指针。
+→hash: 指向要填充的数组的指针。
+意义: 生成一个32字节（256位）的哈希值。
+
+shs256_init(sh)
+
+Parameters:
+→sh: 指向SHA-256结构实例的指针。
+意义: 初始化SHA-256的实例。
+
+shs256_process(sh, byte)
+
+Parameters:
+←sh: 指向当前实例的指针。
+←byte: 要处理的字符。
+意义: 处理单个字节，为哈希过程提供输入。
+
+shs384_hash(sh, hash)
+
+Parameters: 类似shs256_hash，但生成48字节（384位）的哈希值。
+意义: 生成384位的哈希值。
+
+shs384_init(sh)
+
+Parameters: 类似shs256_init。
+意义: 初始化SHA-384的实例。
+
+shs384_process(sh, byte)
+
+Parameters: 类似shs256_process。
+意义: 为SHA-384处理单个字节。
+
+shs512_hash(sh, hash)
+
+Parameters: 类似shs256_hash，但生成64字节（512位）的哈希值。
+意义: 生成512位的哈希值。
+
+shs512_init(sh)
+
+Parameters: 类似shs256_init。
+意义: 初始化SHA-512的实例。
+
+shs512_process(sh, byte)
+
+Parameters: 类似shs256_process。
+意义: 为SHA-512处理单个字节。
+
+shs_hash(sh, hash)
+
+Parameters: 类似shs256_hash，但生成20字节（160位）的哈希值。
+意义: 生成160位的哈希值。
+
+shs_init(sh)
+
+Parameters: 类似shs256_init。
+意义: 初始化SHA-1的实例。
+
+shs_process(sh, byte)
+
+Parameters: 类似shs256_process。
+意义: 为SHA-1处理单个字节。
+
+strong_bigdig(rng, n, b, x)
+
+Parameters:
+←rng: 指向随机数生成器的指针。
+←n: 随机数的长度。
+←b: 基数。
+→x: 生成的随机大数。
+意义: 从密码学强随机数生成器生成指定长度的大随机数。
+
+strong_bigrand(rng, w, x)
+
+Parameters:
+←rng: 指向当前实例的指针。
+←w: 随机数的范围。
+→x: 生成的随机大数。
+意义: 使用随机数生成器生成一个密码学上强的随机大数。
+
+strong_init(rng, rawlen, raw, tod)
+
+Parameters:
+→rng: 指向随机数生成器的指针。
+←rawlen: 原始数据的长度。
+←raw: 长度为rawlen的原始数据数组。
+←tod: 32位时间戳。
+意义: 初始化密码学上强的随机数生成器。
+
+strong_kill(rng)
+
+Parameters:
+←rng: 指向随机数生成器的指针。
+意义: 销毁随机数生成器的内部状态。
+
+strong_rng(rng)
+
+Parameters:
+←rng: 指向随机数生成器的指针。
+Returns: 一个随机字节。
+意义: 生成一个密码学上强的随机字节序列。

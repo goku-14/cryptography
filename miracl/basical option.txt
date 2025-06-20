@@ -1,0 +1,387 @@
+Low Level Routines
+absol(x, y)
+
+Parameters:
+←x: 输入的数。
+→y: 输出的数，即x的绝对值。
+意义: 计算大数或flash数的绝对值。
+
+add(x, y, z)
+
+Parameters:
+←x: 第一个加数。
+←y: 第二个加数。
+→z: 和，即x + y。
+意义: 将两个大数相加。
+
+big_to_bytes(max, x, ptr, justify)
+
+Parameters:
+←max: 要写入的最多字节数。
+←x: 原始的大数。
+→ptr: 二进制字节字符串的目的地。
+→justify: 如果为TRUE，则输出右对齐，否则不抑制前导零。
+意义: 将正大数转换为二进制字节字符串。
+
+bigbits(n, x)
+
+Parameters:
+←n: 所希望的随机大数的长度。
+→x: 生成的随机数。
+意义: 生成给定长度的随机大数。
+
+brand()
+
+Returns: 一个随机整数。
+意义: 生成随机整数数。注意，此生成器不是加密安全的。
+
+bytes_to_big(len, ptr, x)
+
+Parameters:
+←len: ptr的长度。
+←ptr: 二进制字节字符串的字节数组。
+→x: 大数结果。
+意义: 将二进制字节字符串转换为大数。
+
+cinnum(x, filep)
+
+Parameters:
+→x: 大/flash数。
+←filep: 文件描述符。
+意义: 从键盘或文件中输入大数或flash数。
+
+cinstr(x, string)
+
+Parameters:
+→x: 大/flash数。
+←string: 字符数组。
+意义: 从字符串中输入大数或flash数。
+
+compare(x, y)
+
+Parameters:
+←x: 第一个数。
+→y: 第二个数。
+Returns: 如果x > y返回+1，如果x = y返回0，如果x < y返回-1。
+意义: 比较两个大数。
+
+convert(n, x)
+
+Parameters:
+←n: 整数。
+→x: 转换后的大数格式。
+意义: 将整数转换为大数格式。
+
+copy(x, y)
+
+Parameters:
+←x: 源大数。
+→y: 目标大数，y = x。
+意义: 复制大数或flash数。
+
+cotnum(x, filep)
+
+Parameters:
+←x: 要输出的大/flash数。
+→filep: 文件描述符。
+意义: 将大数或flash数输出到屏幕或文件。
+
+cotstr(x, string)
+
+Parameters:
+←x: 大/flash数。
+→string: 字符串。
+意义: 将大数或flash数输出到指定的字符串。
+
+decr(x, n, z)
+
+Parameters:
+←x: 被减数。
+←n: 整数减量。
+→z: 差，即x - n。
+意义: 将大数减去整数。
+
+divide(x, y, z)
+
+Parameters:
+←→x: 被除数。
+→y: 除数。
+→z: 商或余数。
+意义: 将一个大数除以另一个大数。
+
+divisible(x, y)
+
+Parameters:
+←x: 被除数。
+→y: 除数。
+Returns: 如果y能整除x返回TRUE，否则返回FALSE。
+意义: 测试一个大数是否能被另一个大数整除。
+
+ecp_memalloc(num)
+
+Parameters:
+←num: 要预留空间的椭圆曲线点的数量。
+Returns: 分配的内存的指针。
+意义: 预留空间用于多个椭圆曲线点。
+
+ecp_memkill(mem, num)
+
+Parameters:
+→mem: 要清除并删除的内存的指针。
+←num: 以椭圆曲线点的大小计量的内存大小。
+意义: 删除之前由ecp_memalloc()分配的内存。
+
+exsign(x)
+
+Parameters:
+←x: 大/flash数。
+Returns: x的符号，即如果x是负数返回-1，如果x是零或正数返回+1。
+意义: 提取大/flash数的符号。
+
+get_mip()
+
+Returns: 当前线程的Miracl实例指针。
+意义: 获取当前Miracl实例的指针。
+
+getdig(x, i)
+
+Parameters:
+←x: 大数。
+→i: 要提取的数字的位置。
+Returns: 所请求数字的值。
+意义: 从大数中提取一个数字。
+
+igcd(x, y)
+
+Parameters:
+←x: 第一个整数。
+←y: 第二个整数。
+Returns: x和y的最大公约数。
+意义: 使用欧几里得算法计算两个整数的最大公约数。
+
+incr(x, n, z)
+
+Parameters:
+←x: 被增数。
+←n: 整数增量。
+→z: 增量，即x + n。
+意义: 将大数增加一个整数。
+
+init_big_from_rom(x, len, rom, romsize, romptr)
+
+Parameters:
+→rx: 大数。
+←len: 大数的长度（计算机字）。
+←rom: 存储多达romsize计算机字的ROM内存的地址。
+←romsize: ROM的大小。
+←→romptr: 指向ROM的指针。当访问ROM内存以填充x时，内部递增。
+Returns: 如果成功返回TRUE，如果尝试读取超出ROM末尾则返回FALSE。
+意义: 从ROM内存初始化大变量。
+
+init_point_from_rom(P, len, rom, romsize, romptr)
+
+Parameters: 同上，但用于初始化椭圆曲线点。
+意义: 从ROM内存初始化椭圆曲线点。
+
+innum(x, filep)
+
+Parameters: 类似cinnum，但使用mirsys()中指定的数字基数。
+意义: 从文件或键盘输入大/flash数。
+
+insign(s, x)
+
+Parameters:
+←s: 大/flash要取的符号。
+→x: 设置为s|x|。
+意义: 强制大/flash数为特定符号。
+
+instr(x, string)
+
+Parameters: 类似cinstr，但使用mirsys()中指定的数字基数。
+意义: 从字符串中输入大数或flash数。
+
+
+irand(seed)
+
+Parameters:
+
+←seed: 用于启动随机数生成器的种子。
+意义: 初始化内部随机数系统。
+
+lgconv(n, x)
+
+Parameters:
+←n: 长整数。
+→x: 转换后的大数格式。
+意义: 将长整数转换为大数格式。
+
+mad(x, y, z, w, q, r)
+
+Parameters:
+←x, ←y: 乘数。
+←z: 加数。
+←w: 除数。
+→q: 商。
+→r: 余数。
+意义: 乘法、加法和除法大数操作。
+
+memalloc(num)
+
+Parameters:
+←num: 要预留空间的大/flash变量的数量。
+Returns: 分配的内存的指针。
+意义: 一次性预留空间用于多个大/flash变量。
+
+memkill(mem, len)
+
+Parameters:
+→mem: 要清除并删除的内存的指针。
+←len: 内存的大小（以大数计）。
+意义: 删除之前由memalloc()分配的内存。
+
+mirexit()
+
+意义: 清理当前Miracl实例，并释放所有内部变量。
+
+mirkill(x)
+
+Parameters:
+←x: 要安全销毁的大/flash数。
+意义: 安全销毁大/flash数，通过置零并释放其内存。
+
+mirsys(nd, nb)
+
+Parameters:
+←nd: 每个大/flash变量使用的位数。
+→nb: 数字基数。
+Returns: Miracl实例指针。
+意义: 初始化Miracl系统。
+
+	mirvar(iv)
+
+	Parameters:
+	←iv: 大/flash数的整数值。
+	Returns: 保留的内存的指针。
+	意义: 初始化大/flash变量。
+
+mirvar_mem(mem, index)
+
+Parameters:
+←mem: 指向预分配数组的指针。
+←index: 数组中的索引。
+Returns: 初始化后的大/flash变量。
+意义: 从预分配的字节数组初始化大/flash变量。
+
+multiply(x, y, z)
+
+Parameters:
+←x: 第一个乘数。
+←y: 第二个乘数。
+→z: 乘积，即x * y。
+意义: 将两个大数相乘。
+
+negify(x, y)
+
+Parameters:
+←x: 被取反数。
+→y: 取反结果，即-x。
+意义: 取大/flash数的相反数。
+
+normalise(x, y)
+
+Parameters:
+←x: 原始大数。
+→y: 规范化后的大数。
+Returns: 规范化乘数n。
+意义: 将大数乘以一个数，使其最高位大于基数的一半，以加快后续的除法运算。
+
+numdig(x)
+
+Parameters:
+←x: 大数。
+Returns: x中的数字个数。
+意义: 确定大数中的数字个数。
+
+otnum(x, filep)
+
+Parameters: 类似cotnum，但使用mirsys()中指定的数字基数。
+意义: 将大数或flash数输出到屏幕或文件。
+
+otstr(x, string)
+
+Parameters: 类似cotstr，但使用mirsys()中指定的数字基数。
+意义: 将大数或flash数输出到指定的字符串。
+
+premult(x, n, z)
+
+Parameters:
+←x: 大数。
+←n: 整数。
+→z: 乘积，即n * x。
+意义: 将大数乘以整数。
+
+putdig(n, x, i)
+
+Parameters:
+←n: 新值。
+→x: 大数。
+←i: 要设置的数字位置。
+意义: 设置大数中的一个数字。
+
+remain(x, n)
+
+Parameters:
+←x: 被除数。
+←n: 整数除数。
+Returns: 除法的整数余数。
+意义: 找出大数除以整数的整数余数。
+
+set_io_buffer_size(len)
+
+Parameters:
+←len: 所需的输入/输出缓冲区大小。
+意义: 设置输入/输出缓冲区的大小。
+
+set_user_function(user)
+
+Parameters:
+←user: 指向用户指定的函数的指针，或如果不要求则为NULL。
+意义: 提供用户指定的函数，该函数在一些耗时的Miracl函数期间定期调用。
+
+size(x)
+
+Parameters:
+←x: 大数。
+Returns: x作为整数的值。
+意义: 尝试将大数转换为简单整数，也可用于测试大/flash变量的符号。
+
+subdiv(x, n, z)
+
+Parameters:
+←x: 被除数。
+←n: 整数除数。
+→z: 商，即x / n。
+Returns: 除法的整数余数。
+意义: 将大数除以整数。
+
+subdivisible(x, n)
+
+Parameters:
+←x: 被除数。
+←n: 整数除数。
+Returns: 如果n能整除x返回TRUE，否则返回FALSE。
+意义: 测试一个大数是否能被整数整除。
+
+subtract(x, y, z)
+
+Parameters:
+←x: 被减数。
+←y: 减数。
+→z: 差，即x - y。
+意义: 将两个大数相减。
+
+zero(x)
+
+Parameters:
+→x: 要设置为零的大/flash数。
+意义: 将大/flash数设置为零。

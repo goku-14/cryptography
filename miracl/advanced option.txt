@@ -1,0 +1,334 @@
+Advanced Arithmetic Routines
+bigdig(n, b, x)
+
+Parameters:
+←n: 要生成的随机数的位数。
+←b: 随机数的基数。
+→x: 生成的随机大数，位数为n，基数为b。
+Precondition:
+基数b必须是可打印的，即2 ≤ b ≤ 256。
+意义: 生成给定长度和基数的大随机数。
+
+bigrand(w, x)
+
+Parameters:
+←w: 随机数的范围。
+→x: 生成的随机大数，范围在0 ≤ x < w。
+意义: 在指定范围内生成一个大随机数。
+
+brick_end(b)
+
+Parameters:
+←b: 指向Comb方法当前实例的指针。
+意义: 清理Comb方法应用后的资源。
+
+brick_init(b, g, n, window, nb)
+
+Parameters:
+←→b: 指向当前实例的指针。
+←g: 固定生成器。
+←n: 模数。
+←window: 窗口大小w。
+←nb: 指数中使用的最大位数。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 初始化Comb方法用于模指数运算的实例。
+
+crt(c, u, x)
+
+Parameters:
+←c: 指向当前实例的指针。
+←u: 大数余数数组。
+→x: 当它被当前模数除时，产生的给定余数u。
+Precondition:
+必须先调用crt_init()。
+意义: 应用中国剩余定理。
+
+crt_end(c)
+
+Parameters:
+←c: 指向当前实例的指针。
+意义: 清理中国剩余定理应用后的资源。
+
+crt_init(c, r, moduli)
+
+Parameters:
+→c: 指向当前实例的指针。
+←r: 互质模数的数量。
+←moduli: 至少两个大模数的数组。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 初始化中国剩余定理的实例。
+
+egcd(x, y, z)
+
+Parameters:
+←x: 第一个整数。
+←y: 第二个整数。
+←z: 两个整数的最大公约数。
+Returns: 如果可能，返回GCD作为整数，否则返回MR_TOOBIG。
+意义: 计算两个大数的最大公约数。
+
+expb2(n, x)
+
+Parameters:
+←n: 整数。
+→x: 2的n次幂。
+意义: 计算2的整数次幂。
+
+expint(b, n, x)
+
+Parameters:
+←b: 底数。
+←n: 指数。
+→x: 计算结果b的n次幂。
+意义: 计算一个整数的整数次幂。
+
+fft_mult(x, y, z)
+
+Parameters:
+←x: 第一个大数。
+←y: 第二个大数。
+→z: 乘积，即x * y。
+意义: 使用快速傅里叶变换方法乘以两个大数。
+
+gprime(maxp)
+
+Parameters:
+←maxp: 要生成的最大素数。
+意义: 生成所有到某个限制的素数。
+
+hamming(x)
+
+Parameters:
+←x: 大数。
+Returns: x的汉明重量（其二进制表示中的1的个数）。
+意义: 计算大数的汉明重量。
+
+invers(x, y)
+
+Parameters:
+←x: 被除数。
+←y: 除数。
+Returns: x模y的逆元。
+意义: 计算一个整数模一个互质整数的逆元。
+
+isprime(x)
+
+Parameters:
+←x: 大数。
+Returns: 如果x几乎肯定素数返回TRUE，否则返回FALSE。
+意义: 使用概率性素性测试检查大数是否为素数。
+
+jac(x, n) 和 jack(U, V)
+
+Parameters:
+jac: ←x 要计算的数，←n 模数。
+jack: ←U 和 ←V 为两个大数。
+Returns: 计算雅可比符号的值。
+意义: 计算雅可比符号。
+
+logb2(x)
+
+Parameters:
+←x: 大数。
+Returns: x的大约的以2为底的对数（实际上是它的位数）。
+意义: 计算大数的位数。
+
+lucas(p, r, n, vp, v)
+
+Parameters:
+←p: 底数。
+←r: 指数。
+←n: 模数。
+→vp: Vr−1(p) 模 n。
+→v: Vr(p) 模 n。
+意义: 执行卢卡斯模指数运算。
+
+multi_inverse(m, x, n, w)
+
+Parameters:
+←m: 需要的逆元数量。
+←x: 一个数组，包含需要计算逆元的m个数。
+←n: 模数。
+→w: 包含结果逆元的数组。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 同时找到多个数的模逆元。
+
+nroot(x, n, w)
+
+Parameters:
+←x: 大数。
+←n: 正整数。
+→w: 计算出的x的n次根。
+Returns: 如果根精确返回TRUE，否则返回FALSE。
+意义: 提取大数的n次根。
+
+nxprime(w, x)
+
+Parameters:
+←w: 起始数。
+←x: 计算出的下一个素数。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 找到大于w的下一个素数。
+
+nxsafeprime(type, subset, w, p)
+
+Parameters:
+←type: 安全素数的类型。
+←subset: 一个条件，限制素数q的模4同余。
+←w: 起始数。
+→p: 计算出的安全素数。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 找到大于w的下一个安全素数。
+
+pow_brick(b, e, w)
+
+Parameters:
+←b: 指向当前实例的指针。
+←e: 大指数。
+→w: 计算结果，g^e 模 n。
+Precondition:
+必须先调用brick_init()。
+意义: 使用预存储在brick结构中的值进行模指数运算。
+
+power(x, n, z, w)
+
+Parameters:
+
+←x: 大数。
+←n: 正整数。
+←z: 大数。
+→w: 计算结果，x 的 n 次幂模 z。
+Precondition:
+
+n 必须是正数。
+意义: 计算大数的整数次幂模另一个大数。
+
+powltr(x, y, n, w)
+
+Parameters:
+←x: 整数。
+←y: 大数。
+←n: 模数。
+→w: 计算结果，x 的 y 次幂模 n。
+Returns: 如果可能，返回结果作为整数。否则返回MR_TOOBIG。
+Precondition:
+y 必须是正数。x 和 n 必须是不同的参数。
+意义: 计算一个整数对大数的幂模另一个大数。
+
+powmod(x, y, n, w)
+
+Parameters:
+同上powltr。
+意义: 计算一个大数对大数的幂模另一个大数。
+
+powmod2(x, y, a, b, n, w)
+
+Parameters:
+←x, ←y: 第一组大数和指数。
+←a, ←b: 第二组大数和指数。
+←n: 模数。
+→w: 计算结果，((x^y) * (a^b)) 模 n。
+Precondition:
+y 和 b 必须是正数。n 和 w 必须是不同的参数。模数 n 必须是奇数。
+意义: 计算两个模指数的乘积。
+
+powmodn(n, x, y, p, w)
+
+Parameters:
+←n: 模指数的数量。
+←x: 大数数组。
+←y: 指数数组。
+←p: 模数。
+→w: 计算结果，(x[0]^y[0] * x[1]^y[1] ... x[n-1]^y[n-1]) 模 p。
+Precondition:
+y[] 的值必须都是正数。p 和 w 必须是不同的参数。模数 p 必须是奇数。底层数字基数必须是2的幂。
+意义: 计算n个模指数的乘积。
+
+scrt(c, u, x)
+
+Parameters:
+←c: 指向中国剩余定理当前实例的指针。
+←u: 余数数组。
+→x: 产生给定整数值余数u[]的数。
+Precondition:
+必须先调用scrt_init()。
+意义: 应用小素数模数的中国剩余定理。
+
+scrt_end(c)
+
+Parameters:
+←c: 指向当前中国剩余定理实例的指针。
+意义: 清理中国剩余定理应用后的资源。
+
+scrt_init(c, r, moduli)
+
+Parameters:
+→c: 指向当前实例的指针。
+←r: 互质模数的数量。
+←moduli: 至少两个整数模数的数组。
+Returns: 如果成功返回TRUE，否则返回FALSE。
+意义: 初始化中国剩余定理的实例。
+
+sftbit(x, n, z)
+
+Parameters:
+←x: 大数。
+←n: 如果是正数则左移，如果是负数则右移。
+→z: 移动后的数，即x左移或右移n位。
+意义: 将大整数左移或右移指定位数。
+
+smul(x, y, n)
+
+Parameters:
+←x: 第一个整数。
+←y: 第二个整数。
+←n: 模数。
+Returns: x * y 模 n。
+意义: 计算两个整数模第三个整数的乘积。
+
+spmd(x, n, m)
+
+Parameters:
+←x: 底数。
+←n: 指数。
+←m: 模数。
+Returns: x 的 n 次幂模 m。
+意义: 计算一个整数对另一个整数的幂模第三个整数。
+
+sqrmp(x, m)
+
+Parameters:
+←x: 数字。
+←m: 素数。
+Returns: x 模 m 的平方根，如果不存在则返回0。
+Precondition:
+m 必须是素数，否则结果不可预测。
+意义: 计算一个整数模素数的平方根。
+
+sqroot(x, p, w)
+
+Parameters:
+←x: 大整数。
+←p: 大整数素数。
+→w: 如果平方根存在，则为x模p的平方根，否则为0。
+Returns: 如果平方根存在返回TRUE，否则返回FALSE。
+Precondition:
+数字p必须是素数。
+意义: 计算一个大整数模大整数素数的平方根。
+
+trial_division(x, y)
+
+Parameters:
+←x: 大数。
+←→y: 用于试除的另一个大数或同一个大数。
+Returns: 根据试除结果返回不同的值。
+意义: 通过试除小素数来确定大数的素性或返回未分解部分。
+
+xgcd(x, y, xd, yd, z)
+
+Parameters:
+←x, →y: 两个大数。
+→xd, →yd: 用于存储x和y的最小公倍数的变量。
+→z: 计算结果，即x和y的最大公约数。
+Returns: 如果可能，返回GCD作为整数，否则返回MR_TOOBIG。
+意义: 计算两个大数的扩展最大公约数。
